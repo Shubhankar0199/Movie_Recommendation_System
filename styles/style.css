@@ -1,0 +1,237 @@
+/* ----------------------------------------------------
+   GENERAL
+---------------------------------------------------- */
+
+.stApp{
+    background-color:#0E1117;
+    color:white;
+}
+
+/* Hide Streamlit Menu and Footer */
+
+#MainMenu{
+    visibility:hidden;
+}
+
+footer{
+    visibility:hidden;
+}
+
+header{
+    visibility:hidden;
+}
+
+/* ----------------------------------------------------
+   TITLE
+---------------------------------------------------- */
+
+h1{
+    text-align:center;
+    color:#FFFFFF;
+    font-weight:700;
+    margin-bottom:0px;
+}
+
+p{
+    color:#C9D1D9;
+}
+
+/* ----------------------------------------------------
+   SIDEBAR
+---------------------------------------------------- */
+
+section[data-testid="stSidebar"]{
+    background:#161B22;
+    border-right:1px solid #30363D;
+}
+
+section[data-testid="stSidebar"] h1{
+    color:white;
+}
+
+/* ----------------------------------------------------
+   CHAT CONTAINER
+---------------------------------------------------- */
+
+[data-testid="stChatMessage"]{
+
+    border-radius:18px;
+    padding:15px;
+    margin-bottom:12px;
+
+    background:#161B22;
+
+    border:1px solid #30363D;
+}
+
+/* ----------------------------------------------------
+   USER MESSAGE
+---------------------------------------------------- */
+
+[data-testid="stChatMessage"]:has(div[data-testid="chatAvatarIcon-user"]){
+
+    background:#1E293B;
+
+}
+
+/* ----------------------------------------------------
+   ASSISTANT MESSAGE
+---------------------------------------------------- */
+
+[data-testid="stChatMessage"]:has(div[data-testid="chatAvatarIcon-assistant"]){
+
+    background:#111827;
+
+}
+
+/* ----------------------------------------------------
+   CHAT INPUT
+---------------------------------------------------- */
+
+[data-testid="stChatInput"]{
+
+    border-radius:15px;
+
+}
+
+textarea{
+
+    color:white !important;
+
+}
+
+/* ----------------------------------------------------
+   BUTTONS
+---------------------------------------------------- */
+
+.stButton>button{
+
+    width:100%;
+
+    background:#E50914;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+
+}
+
+.stButton>button:hover{
+
+    background:#ff2b36;
+
+    transform:scale(1.02);
+
+}
+
+/* ----------------------------------------------------
+   MOVIE CARD
+---------------------------------------------------- */
+
+.movie-card{
+
+    background:#161B22;
+
+    border-radius:15px;
+
+    padding:18px;
+
+    margin-top:15px;
+
+    margin-bottom:15px;
+
+    border:1px solid #30363D;
+
+    box-shadow:0px 4px 12px rgba(0,0,0,0.3);
+
+}
+
+.movie-title{
+
+    color:#58A6FF;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+}
+
+.movie-rating{
+
+    color:#FFD700;
+
+    font-size:18px;
+
+}
+
+.movie-genre{
+
+    color:#2ECC71;
+
+    font-size:16px;
+
+}
+
+.movie-tagline{
+
+    color:#F39C12;
+
+    font-style:italic;
+
+}
+
+.movie-overview{
+
+    color:#D1D5DB;
+
+    line-height:1.6;
+
+}
+
+/* ----------------------------------------------------
+   DIVIDER
+---------------------------------------------------- */
+
+hr{
+
+    border:1px solid #30363D;
+
+}
+
+/* ----------------------------------------------------
+   SCROLLBAR
+---------------------------------------------------- */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0E1117;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#444;
+
+    border-radius:10px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#666;
+
+}
