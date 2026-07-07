@@ -1,10 +1,7 @@
 import streamlit as st
 import time
 
-from utils.recommender import (
-    recommend,
-    get_movie_suggestions
-)
+from utils.recommender import recommend, get_movie_suggestions
 
 # ---------------------------------------------------
 # PAGE CONFIG
@@ -31,10 +28,7 @@ with st.sidebar:
 
     st.title("🎬 Movie Assistant")
 
-    st.write(
-        """          Welcome!
-        """
-    )
+    st.write("Welcome!")
 
     st.divider()
 
@@ -54,10 +48,7 @@ with st.sidebar:
 # ---------------------------------------------------
 
 st.title("🎬 AI Movie Recommendation Assistant")
-
-st.caption(
-    "Discover movies similar to your favourites."
-)
+st.caption("Discover movies similar to your favourites.")
 
 # ---------------------------------------------------
 # CHAT HISTORY
@@ -66,12 +57,10 @@ st.caption(
 if "messages" not in st.session_state:
 
     st.session_state.messages = [
-
         {
             "role": "assistant",
             "content": "Hello 👋\n\nTell me your favourite movie."
         }
-
     ]
 
 # ---------------------------------------------------
@@ -88,9 +77,9 @@ for message in st.session_state.messages:
 # USER INPUT
 # ---------------------------------------------------
 
-if prompt := st.chat_input("Enter movie name..."):
+prompt = st.chat_input("Enter movie name...")
 
-    # Display User Message
+if prompt:
 
     st.session_state.messages.append(
         {
@@ -103,49 +92,38 @@ if prompt := st.chat_input("Enter movie name..."):
 
         st.markdown(prompt)
 
-    # Assistant Response
-
     with st.chat_message("assistant"):
 
         placeholder = st.empty()
 
-        recommendations = recommend(prompt)
+        try:
 
-        # --------------------------
-        # Movie Not Found
-        # --------------------------
+            recommendations = recommend(prompt)
 
-        if recommendations is None:
+            if recommendations is None or recommendations.empty:
 
-            suggestions = get_movie_suggestions(prompt)
+                suggestions = get_movie_suggestions(prompt)
 
-            response = "❌ Movie not found.\n\n"
+                response = "❌ Movie not found.\n\n"
 
-            if suggestions:
+                if suggestions:
 
-                response += "Did you mean:\n\n"
+                    response += "Did you mean:\n\n"
 
-                for movie in suggestions:
+                    for movie in suggestions:
+                        response += f"• {movie}\n"
 
-                    response += f"• {movie}\n"
+                else:
+
+                    response += "Please try another movie."
 
             else:
 
-                response += "Please try another movie."
+                response = f"🎬 **Movies similar to '{prompt}'**\n\n"
 
-        # --------------------------
-        # Movie Found
-        # --------------------------
+                for _, movie in recommendations.iterrows():
 
-        else:
-
-            response = (
-                f"🎬 **Movies similar to '{prompt}'**\n\n"
-            )
-
-            for _, movie in recommendations.iterrows():
-
-                response += f"""
+                    response += f"""
 ### 🍿 {movie['title']}
 
 ⭐ **Rating:** {movie['vote_average']}
@@ -155,15 +133,16 @@ if prompt := st.chat_input("Enter movie name..."):
 📝 **Tagline:** {movie['tagline']}
 
 📖 **Overview:**
+
 {movie['overview']}
 
 ---
 
 """
 
-        # --------------------------
-        # Typing Animation
-        # --------------------------
+        except Exception as e:
+
+            response = f"❌ Error: {e}"
 
         full_text = ""
 
@@ -176,8 +155,6 @@ if prompt := st.chat_input("Enter movie name..."):
             time.sleep(0.02)
 
         placeholder.markdown(response)
-
-    # Save Assistant Response
 
     st.session_state.messages.append(
         {
